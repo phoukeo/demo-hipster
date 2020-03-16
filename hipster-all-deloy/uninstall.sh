@@ -1,2 +1,5 @@
-kubectl delete -n hipster -f .
-kubectl delete namespace hipster
+# Set namespace to desired name
+export NAMESPACE="hipster"
+
+kubectl delete -n ${NAMESPACE} -f ./
+kubectl delete namespace ${NAMESPACE}
