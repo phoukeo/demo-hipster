@@ -14,6 +14,15 @@ podTemplate(containers: [
                       """
                     }
                 }
+                stage('Build an Anthos project') {
+                  git 'https://github.com/phoukeo/demo-hipster.git'
+                  withCredentials([file(credentialsId: 'user2-anthos-ansiblized-kubeconfig', variable: 'KUBECONFIG2')]) {
+                      sh """
+                      export KUBECONFIG=$KUBECONFIG2
+                      cd hipster-all-deploy && ./deploy.sh
+                      """
+                    }
+                }
             }
         }
     }
