@@ -16,9 +16,9 @@ podTemplate(
                         sh """
                         cd hipster-all-deploy
                         export KUBECONFIG=$KUBECONFIG1
-                        ./deploy-test.sh && ./deploy-prod.sh
+                        ./deploy.sh
                         export KUBECONFIG=$KUBECONFIG2
-                        ./deploy-test.sh && ./deploy-prod.sh
+                        ./deploy.sh
                         """
                       }
                   }
