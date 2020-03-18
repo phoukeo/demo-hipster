@@ -10,7 +10,7 @@ podTemplate(containers: [
                   withCredentials([file(credentialsId: 'user1-anthos-ansiblized-kubeconfig', variable: 'KUBECONFIG1')]) {
                       sh """
                       export KUBECONFIG=$KUBECONFIG1
-                      cd hipster-all-deploy && ./deploy.sh
+                      cd hipster-all-deploy && ./deploy-test.sh && ./deploy-prod.sh
                       """
                     }
                 }
