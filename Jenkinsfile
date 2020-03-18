@@ -9,8 +9,9 @@ podTemplate(
               container('anthos') {
                   stage('Build an Anthos project') {
                     git 'https://github.com/phoukeo/demo-hipster.git'
-                    withCredentials([file(credentialsId: 'user1-anthos-ansiblized-kubeconfig', variable: 'KUBECONFIG1')]) {
-                    withCredentials([file(credentialsId: 'pt-was-not-here-kubeconfig', variable: 'KUBECONFIG2')]) {
+                    withCredentials([file(credentialsId: 'user1-anthos-ansiblized-kubeconfig', variable: 'KUBECONFIG1')]),
+                    withCredentials([file(credentialsId: 'pt-was-not-here-kubeconfig', variable: 'KUBECONFIG2')])
+                     {
                         sh """
                         cd hipster-all-deploy
                         export KUBECONFIG=$KUBECONFIG1
