@@ -1,5 +1,5 @@
 podTemplate(
-  name: 'kubernetes-prod',
+  cloud: 'kubernetes-prod',
   containers: [
       containerTemplate(name: 'anthos', image: 'thilavanh/jenkins-slave-k8s', ttyEnabled: true, command: 'cat')
     ]) {
@@ -22,7 +22,7 @@ podTemplate(
   }
 
 podTemplate(
-  name: 'kubernetes-test',
+  cloud: 'kubernetes-test',
   containers: [
       containerTemplate(name: 'anthos', image: 'thilavanh/jenkins-slave-k8s', ttyEnabled: true, command: 'cat')
     ]) {
