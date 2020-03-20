@@ -10,8 +10,8 @@ podTemplate(
                   stage('Install Hipster Demo Application') {
                     git 'https://github.com/phoukeo/demo-hipster.git'
                     withCredentials([
-                      file(credentialsId: '"{$cluster1}"', variable: 'KUBECONFIG1'),
-                      file(credentialsId: '"{$cluster2}"', variable: 'KUBECONFIG2')])
+                      file(credentialsId: '"${cluster1}"', variable: 'KUBECONFIG1'),
+                      file(credentialsId: '"${cluster2}"', variable: 'KUBECONFIG2')])
                      {
                         sh """
                         cd hipster-all-deploy
