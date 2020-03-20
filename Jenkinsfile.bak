@@ -10,13 +10,15 @@ podTemplate(
                   stage('Install Hipster Demo Application') {
                     git 'https://github.com/phoukeo/demo-hipster.git'
                     withCredentials([
-                      file(credentialsId: '${cluster1}', variable: 'KUBECONFIG1'),
-                      file(credentialsId: '${cluster2}', variable: 'KUBECONFIG2')])
+                      file(credentialsId: 'user1-anthos-ansiblized-kubeconfig', variable: 'KUBECONFIG1'),
+                      file(credentialsId: 'pt-was-not-here-kubeconfig', variable: 'KUBECONFIG2')])
                      {
                         sh """
-                        export NAMESPACE=hipster
-                        kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hipster-all-deploy/deploy.sh -n ${NAMESPACE}
-                        kubectl --kubeconfig $KUBECONFIG2 ${params.mode} -f ./hipster-all-deploy/deploy.sh -n ${NAMESPACE}
+                        cd hipster-all-deploy
+                        export KUBECONFIG=$KUBECONFIG1
+                        ./deploy.sh
+                        export KUBECONFIG=$KUBECONFIG2
+                        ./deploy.sh
                         """
                       }
                   }
