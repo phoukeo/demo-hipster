@@ -14,9 +14,8 @@ podTemplate(
                       file(credentialsId: '${cluster2}', variable: 'KUBECONFIG2')])
                      {
                         sh """
-                        export NAMESPACE=hipster
-                        kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hipster-all-deploy/deploy.sh -n ${NAMESPACE}
-                        kubectl --kubeconfig $KUBECONFIG2 ${params.mode} -f ./hipster-all-deploy/deploy.sh -n ${NAMESPACE}
+                        kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hipster-all-deploy/deploy.sh -n hipster
+                        kubectl --kubeconfig $KUBECONFIG2 ${params.mode} -f ./hipster-all-deploy/deploy.sh -n hipster
                         """
                       }
                   }
