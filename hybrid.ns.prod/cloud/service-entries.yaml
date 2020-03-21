@@ -4,7 +4,7 @@ metadata:
   name: adservice-entry
 spec:
   hosts:
-  - adservice.hipster.global
+  - adservice.prod.global
   location: MESH_INTERNAL
   ports:
   - name: grpc
@@ -24,7 +24,7 @@ metadata:
   name: checkoutservice-entry
 spec:
   hosts:
-  - checkoutservice.hipster.global
+  - checkoutservice.prod.global
   location: MESH_INTERNAL
   ports:
   - name: grpc
@@ -44,7 +44,7 @@ metadata:
   name: currencyservice-entry
 spec:
   hosts:
-  - currencyservice.hipster.global
+  - currencyservice.prod.global
   location: MESH_INTERNAL
   ports:
   - name: grpc
@@ -64,7 +64,7 @@ metadata:
   name: shippingservice-entry
 spec:
   hosts:
-  - shippingservice.hipster.global
+  - shippingservice.prod.global
   location: MESH_INTERNAL
   ports:
   - name: grpc

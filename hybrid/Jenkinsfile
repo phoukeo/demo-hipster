@@ -14,8 +14,8 @@ podTemplate(
                       file(credentialsId: '${cluster2}', variable: 'KUBECONFIG2')])
                      {
                         sh """
-                        kubectl --kubeconfig $KUBECONFIG2 ${params.mode} -f ./hybrid/onprem -n prod
-                        kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hybrid/cloud -n prod
+                        kubectl --kubeconfig $KUBECONFIG2 ${params.mode} -f ./hybrid/onprem -n hipster
+                        kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hybrid/cloud -n hipster
                         """
                       }
                   }

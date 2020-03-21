@@ -4,7 +4,7 @@ metadata:
   name: frontendservice-entry
 spec:
   hosts:
-  - frontend.prod.global
+  - frontend.hipster.global
   location: MESH_INTERNAL
   ports:
   - name: http1
@@ -24,7 +24,7 @@ metadata:
   name: productcatalogservice-entry
 spec:
   hosts:
-  - productcatalogservice.prod.global
+  - productcatalogservice.hipster.global
   location: MESH_INTERNAL
   ports:
   - name: grpc
@@ -44,7 +44,7 @@ metadata:
   name: cartservice-entry
 spec:
   hosts:
-  - cartservice.prod.global
+  - cartservice.hipster.global
   location: MESH_INTERNAL
   ports:
   - name: grpc
