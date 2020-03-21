@@ -92,6 +92,6 @@ spec:
   - address: 10.50.5.97
     ports:
       grpc: 15443
-  - address: {["$(kubectl get --context=$CTX_CLUSTER1 svc --selector=app=istio-egressgateway -n istio-system -o yaml -o jsonpath='{.items[0].spec.clusterIP}')"]}
+  - address: {["$(kubectl get svc --selector=app=istio-egressgateway -n istio-system -o yaml -o jsonpath='{.items[0].spec.clusterIP}')"]}
     ports:
       grpc: 15443
