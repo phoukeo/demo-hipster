@@ -29,7 +29,7 @@ spec:
   addresses:
   - 240.0.0.2
   endpoints:
-  - address: 104.196.235.117
+  - address: 10.50.5.97
     ports:
       grpc: 15443
 ---
@@ -49,7 +49,7 @@ spec:
   addresses:
   - 240.0.0.3
   endpoints:
-  - address: 104.196.235.117
+  - address: 10.50.5.97
     ports:
       grpc: 15443
 ---
@@ -69,7 +69,7 @@ spec:
   addresses:
   - 240.0.0.4
   endpoints:
-  - address: 104.196.235.117
+  - address: 10.50.5.97
     ports:
       grpc: 15443
 ---
@@ -89,6 +89,6 @@ spec:
   addresses:
   - 240.0.0.8
   endpoints:
-  - address: 104.196.235.117
+  - address: 10.50.5.97
     ports:
       grpc: 15443
