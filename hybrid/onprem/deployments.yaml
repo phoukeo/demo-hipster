@@ -32,7 +32,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/emailservice:v0.1.1
+        image: gcr.io/google-samples/microservices-demo/emailservice:v0.1.0
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -66,7 +66,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.1.1
+          image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.1.0
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -114,7 +114,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.1.1
+        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.1.0
         ports:
         - containerPort: 50051
         readinessProbe:
@@ -147,7 +147,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.1.1
+        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.1.0
         ports:
         - name: grpc
           containerPort: 7000
@@ -180,7 +180,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/shippingservice:v0.1.1
+        image: gcr.io/google-samples/microservices-demo/shippingservice:v0.1.0
         ports:
         - containerPort: 50051
         readinessProbe:
@@ -217,7 +217,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/adservice:v0.1.1
+        image: gcr.io/google-samples/microservices-demo/adservice:v0.1.0
         ports:
         - containerPort: 9555
         env:
