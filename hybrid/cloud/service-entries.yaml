@@ -32,6 +32,9 @@ spec:
   - address: 10.50.5.97
     ports:
       grpc: 15443
+  - address: 10.111.1.233
+    ports:
+      grpc: 15443
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
@@ -52,6 +55,9 @@ spec:
   - address: 10.50.5.97
     ports:
       grpc: 15443
+  - address: 10.111.1.233
+    ports:
+      grpc: 15443
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
@@ -70,6 +76,9 @@ spec:
   - 240.0.0.4
   endpoints:
   - address: 10.50.5.97
+    ports:
+      grpc: 15443
+  - address: 10.111.1.233
     ports:
       grpc: 15443
 ---
