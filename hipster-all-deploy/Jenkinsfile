@@ -7,7 +7,7 @@ podTemplate(
       node(POD_LABEL) {
           stage('Get an Anthos project') {
               container('anthos') {
-                  stage('Install Hipster Demo Application') {
+                  stage('Install Multi-Cluster Hipster Demo Application') {
                     git 'https://github.com/phoukeo/demo-hipster.git'
                     withCredentials([
                       file(credentialsId: '${cluster1}', variable: 'KUBECONFIG1'),
