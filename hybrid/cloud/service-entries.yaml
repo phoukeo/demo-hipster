@@ -25,11 +25,12 @@ spec:
   - name: grpc
     number: 9555
     protocol: GRPC
-  resolution: DNS
+  resolution: STATIC
   addresses:
   - 240.0.0.2
   endpoints:
   - address: 10.50.5.97
+    network: external
     ports:
       grpc: 15443
 ---
@@ -45,11 +46,12 @@ spec:
   - name: grpc
     number: 5050
     protocol: GRPC
-  resolution: DNS
+  resolution: STATIC
   addresses:
   - 240.0.0.3
   endpoints:
   - address: 10.50.5.97
+    network: external
     ports:
       grpc: 15443
 ---
@@ -65,11 +67,12 @@ spec:
   - name: grpc
     number: 7000
     protocol: GRPC
-  resolution: DNS
+  resolution: STATIC
   addresses:
   - 240.0.0.4
   endpoints:
   - address: 10.50.5.97
+    network: external
     ports:
       grpc: 15443
 ---
@@ -85,10 +88,11 @@ spec:
   - name: grpc
     number: 50051
     protocol: GRPC
-  resolution: DNS
+  resolution: STATIC
   addresses:
   - 240.0.0.8
   endpoints:
   - address: 10.50.5.97
+    network: external
     ports:
       grpc: 15443
