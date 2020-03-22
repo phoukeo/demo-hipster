@@ -14,7 +14,7 @@ spec:
   addresses:
   - 240.0.0.2
   endpoints:
-  - address: 10.50.5.97
+  - address: 10.50.5.98
     network: external
     ports:
       grpc: 15443
@@ -38,7 +38,7 @@ spec:
   addresses:
   - 240.0.0.3
   endpoints:
-  - address: 10.50.5.97
+  - address: 10.50.5.98
     network: external
     ports:
       grpc: 15443
@@ -62,7 +62,7 @@ spec:
   addresses:
   - 240.0.0.4
   endpoints:
-  - address: 10.50.5.97
+  - address: 10.50.5.98
     network: external
     ports:
       grpc: 15443
@@ -86,7 +86,7 @@ spec:
   addresses:
   - 240.0.0.5
   endpoints:
-  - address: 10.50.5.97
+  - address: 10.50.5.98
     network: external
     ports:
       grpc: 15443
