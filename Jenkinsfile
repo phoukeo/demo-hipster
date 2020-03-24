@@ -5,18 +5,18 @@ podTemplate(
     ]) {
 
       node(POD_LABEL) {
+        parameters {
+          choice(choices: ['apply', 'delete'], description: 'apply, delete', name: 'mode')
+          choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+          credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig (user1 kubeconfig anthos)", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
+          credentials(defaultValue: "chicken-crossed-the-road-kubeconfig (chicken-crossed-the-road kubeconfig creds)", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
+        }
+        environment {
+          KUBECONFIG1 = 'test'
+          KUBECONFIG2 = '$cluster2'
+        }
           stage('Get an Anthos project') {
               container('anthos') {
-                parameters {
-                  choice(choices: ['apply', 'delete'], description: 'apply, delete', name: 'mode')
-                  choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
-                  credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig (user1 kubeconfig anthos)", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
-                  credentials(defaultValue: "chicken-crossed-the-road-kubeconfig (chicken-crossed-the-road kubeconfig creds)", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
-                }
-                environment {
-                  KUBECONFIG1 = 'test'
-                  KUBECONFIG2 = '$cluster2'
-                }
                   stage('Install Hybrid Hipster Demo Application') {
                     // git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
                     // withCredentials([
@@ -25,7 +25,8 @@ podTemplate(
                     //   {
                         sh """
                         echo "${params.mode}"
-                        echo "${params.KUBECONFIG1}"
+                        echo "${params.cluster1}"
+                        echo "${env.KUBECONFIG2}"
                         kubectl --kubeconfig "${env.KUBECONFIG2}" ${params.mode} -f ./hybrid/onprem -n hipster
                         kubectl --kubeconfig "${env.KUBECONFIG1}" ${params.mode} -f ./hybrid/cloud -n hipster
                         """
