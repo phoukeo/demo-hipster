@@ -12,10 +12,6 @@ podTemplate(
                   credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig (user1 kubeconfig anthos)", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
                   credentials(defaultValue: "chicken-crossed-the-road-kubeconfig (chicken-crossed-the-road kubeconfig creds)", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
                 }
-                environment {
-                  KUBECONFIG1 = 'test'
-                  KUBECONFIG2 = '$cluster2'
-                }
                   stage('Install Hybrid Hipster Demo Application') {
                     // git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
                     // withCredentials([
@@ -31,4 +27,9 @@ podTemplate(
               }
           }
       }
+      environment {
+        KUBECONFIG1 = 'test'
+        KUBECONFIG2 = '$cluster2'
+      }
+
   }
