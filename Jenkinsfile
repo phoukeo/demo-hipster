@@ -13,8 +13,8 @@ podTemplate(
                   credentials(defaultValue: "chicken-crossed-the-road-kubeconfig (chicken-crossed-the-road kubeconfig creds)", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
                 }
                 environment {
-                  KUBECONFIG1 = "$cluster1"
-                  KUBECONFIG2 = "$cluster2"
+                  KUBECONFIG1 = "${params.cluster1}"
+                  KUBECONFIG2 = "${params.cluster2}"
                 }
                   stage('Install Hybrid Hipster Demo Application') {
                     // git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
@@ -23,8 +23,8 @@ podTemplate(
                     //   file(credentialsId: "${params.cluster2}", variable: 'KUBECONFIG2')])
                     //   {
                         sh """
-                        kubectl --kubeconfig $KUBECONFIG2 ${params.mode} -f ./hybrid/onprem -n hipster
-                        kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hybrid/cloud -n hipster
+                        kubectl --kubeconfig ${env.KUBECONFIG2} ${params.mode} -f ./hybrid/onprem -n hipster
+                        kubectl --kubeconfig ${env.KUBECONFIG1} ${params.mode} -f ./hybrid/cloud -n hipster
                         """
                       // }
                   }
