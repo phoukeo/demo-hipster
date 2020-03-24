@@ -23,8 +23,8 @@ podTemplate(
                         sh """
                         echo ${params.mode}
                         echo ${params.cluster1}
-                        kubectl --kubeconfig $cluster2 ${params.mode} -f ./hybrid/onprem -n hipster
-                        kubectl --kubeconfig $cluster1 ${params.mode} -f ./hybrid/cloud -n hipster
+                        # kubectl --kubeconfig $cluster2 ${params.mode} -f ./hybrid/onprem -n hipster
+                        # kubectl --kubeconfig $cluster1 ${params.mode} -f ./hybrid/cloud -n hipster
                         """
 
                   }
