@@ -14,10 +14,10 @@ podTemplate(
                     //   file(credentialsId: "${params.cluster2}", variable: 'KUBECONFIG2')])
                     //   {
                     parameters {
-                      choice(choices: ['apply', 'delete'], description: 'apply, delete', name: 'mode')
+                      choice(name: 'mode', choices: ['apply', 'delete'], description: 'apply, delete' )
                       choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
-                      credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig (user1 kubeconfig anthos)", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
-                      credentials(defaultValue: "chicken-crossed-the-road-kubeconfig (chicken-crossed-the-road kubeconfig creds)", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
+                      credentials(name: 'cluster1', defaultValue: "user1-anthos-ansiblized-kubeconfig (user1 kubeconfig anthos)", description: 'Your User Cluster1', credentialType: "Secret file", required: true)
+                      credentials(name: 'cluster2', defaultValue: "chicken-crossed-the-road-kubeconfig (chicken-crossed-the-road kubeconfig creds)", description: 'Your User Cluster2', credentialType: "Secret file", required: true)
                     }
                     environment {
                       KUBECONFIG1 = 'test'
