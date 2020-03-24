@@ -4,8 +4,8 @@ podTemplate(
       containerTemplate(name: 'anthos', image: 'thilavanh/centos-kubectl', ttyEnabled: true)
     ]) {
       parameters {
-        choice(choices: ['apply', 'delete'], description: 'apply, delete', name: 'mode')
-        credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
+        choice(choices: ['apply', 'delete'], description: 'apply, delete', name: 'mode'),
+        credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true),
         credentials(defaultValue: "chicken-crossed-the-road-kubeconfig", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
       }
 
