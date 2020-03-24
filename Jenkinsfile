@@ -17,12 +17,12 @@ podTemplate(
                     // withCredentials([
                     //   file(credentialsId: '"${params.cluster1}"', variable: 'KUBECONFIG1'),
                     //   file(credentialsId: '"${params.cluster2}"', variable: 'KUBECONFIG2')])
-                     {
+
                         sh """
                         kubectl --kubeconfig ${params.cluster2} ${params.mode} -f ./hybrid/onprem -n hipster
                         kubectl --kubeconfig ${params.cluster1} ${params.mode} -f ./hybrid/cloud -n hipster
                         """
-                      }
+
                   }
               }
           }
