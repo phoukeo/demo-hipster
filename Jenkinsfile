@@ -22,7 +22,7 @@ podTemplate(
 
                         sh """
                         echo '"${params.mode}"'
-                        echo '${params.mode}'
+                        echo '${params.CHOICE}'
                         echo "${params.cluster1}"
                         echo ${params.cluster2}
                         """
