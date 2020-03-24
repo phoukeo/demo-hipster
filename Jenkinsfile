@@ -5,8 +5,8 @@ podTemplate(
     ]) {
       parameters {
         choice(choices: ['apply', 'delete'], description: 'apply, delete', name: 'mode')
-        credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
-        credentials(defaultValue: "chicken-crossed-the-road-kubeconfig", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
+        credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig (user1 kubeconfig anthos)", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
+        credentials(defaultValue: "chicken-crossed-the-road-kubeconfig (chicken-crossed-the-road kubeconfig creds)", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
       }
 
       node(POD_LABEL) {
