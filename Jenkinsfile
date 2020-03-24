@@ -21,8 +21,9 @@ podTemplate(
                     //   {
 
                         sh """
-                        echo '${params.mode}'
-                        echo '${params.cluster1}'
+                        echo '"${params.mode}"'
+                        echo "${params.cluster1}"
+                        echo ${params.cluster2}
                         """
 
                   }
