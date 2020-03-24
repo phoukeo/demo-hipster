@@ -7,12 +7,12 @@ podTemplate(
       node(POD_LABEL) {
           stage('Get an Anthos project') {
               container('anthos') {
-                parameters {
-                  choice(choices: ['apply', 'delete'], description: 'apply, delete', name: 'mode')
-                  credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
-                  credentials(defaultValue: "chicken-crossed-the-road-kubeconfig", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
-                }
                   stage('Install Hybrid Hipster Demo Application') {
+                    parameters {
+                      choice(choices: ['apply', 'delete'], description: 'apply, delete', name: 'mode')
+                      credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
+                      credentials(defaultValue: "chicken-crossed-the-road-kubeconfig", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
+                    }
                     git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
                     withCredentials([
                       file(credentialsId: '${cluster1}', variable: 'KUBECONFIG1'),
