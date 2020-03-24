@@ -19,7 +19,7 @@ podTemplate(
                       credentials(name: 'cluster1', defaultValue: "user1-anthos-ansiblized-kubeconfig (user1 kubeconfig anthos)", description: 'Your User Cluster1', credentialType: "Secret file", required: true)
                       credentials(name: 'cluster2', defaultValue: "chicken-crossed-the-road-kubeconfig (chicken-crossed-the-road kubeconfig creds)", description: 'Your User Cluster2', credentialType: "Secret file", required: true)
                     }
-                      {
+
                         sh """
                         echo $cluster1
                         echo ${params.mode}
@@ -27,7 +27,7 @@ podTemplate(
                         kubectl --kubeconfig $cluster2 ${params.mode} -f ./hybrid/onprem -n hipster
                         kubectl --kubeconfig $cluster1 ${params.mode} -f ./hybrid/cloud -n hipster
                         """
-                      }
+                      
                   }
               }
           }
