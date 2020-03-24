@@ -3,13 +3,13 @@ podTemplate(
   containers: [
       containerTemplate(name: 'anthos', image: 'thilavanh/centos-kubectl', ttyEnabled: true)
     ]) {
-      parameters {
-        choice(choices: ['apply', 'delete'], description: 'apply, delete', name: 'mode')
-        credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig (user1 kubeconfig anthos)", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
-        credentials(defaultValue: "chicken-crossed-the-road-kubeconfig (chicken-crossed-the-road kubeconfig creds)", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
-      }
 
       node(POD_LABEL) {
+        parameters {
+          choice(choices: ['apply', 'delete'], description: 'apply, delete', name: 'mode')
+          credentials(defaultValue: "user1-anthos-ansiblized-kubeconfig (user1 kubeconfig anthos)", description: 'Your User Cluster1', credentialType: "Secret file", name: 'cluster1', required: true)
+          credentials(defaultValue: "chicken-crossed-the-road-kubeconfig (chicken-crossed-the-road kubeconfig creds)", description: 'Your User Cluster2', credentialType: "Secret file", name: 'cluster2', required: true)
+        }
           stage('Get an Anthos project') {
               container('anthos') {
                   stage('Install Hybrid Hipster Demo Application') {
