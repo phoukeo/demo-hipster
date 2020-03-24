@@ -15,8 +15,8 @@ podTemplate(
                   stage('Install Hybrid Hipster Demo Application') {
                     git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
                     withCredentials([
-                      file(credentialsId: '${cluster1}', variable: 'KUBECONFIG1'),
-                      file(credentialsId: '${cluster2}', variable: 'KUBECONFIG2')])
+                      file(credentialsId: '${params.cluster1}', variable: 'KUBECONFIG1'),
+                      file(credentialsId: '${params.cluster2}', variable: 'KUBECONFIG2')])
                      {
                         sh """
                         kubectl --kubeconfig $KUBECONFIG2 ${params.mode} -f ./hybrid/onprem -n hipster
