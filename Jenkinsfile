@@ -1,20 +1,14 @@
 properties([[$class: 'JiraProjectProperty'], gitLabConnection(''),
   parameters([
     choice(choices: ['apply'], description: '', name: 'mode'),
-    credentials(credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: 'user1-anthos-ansiblized-kubeconfig', description: '', name: 'cluster1', required: true),
-    credentials(credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: 'chicken-crossed-the-road-kubeconfig', description: '', name: 'cluster2', required: true)
+    credentials(name: 'cluster1', credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: 'user1-anthos-ansiblized-kubeconfig', description: '', required: true),
+    credentials(name: 'cluster2', credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: 'chicken-crossed-the-road-kubeconfig', description: '', required: true)
     ])])
 
 podTemplate(
   cloud: 'kubernetes',
   containers: [
-    containerTemplate(name: 'anthos', image: 'thilavanh/centos-kubectl', ttyEnabled: true,
-      envVars: [
-        secretEnvVar(key: 'KUBECONFIG1', secretName: 'user1-anthos-ansiblized-kubeconfig', secretKey: 'user1-anthos-ansiblized-kubeconfig'),
-        secretEnvVar(key: 'KUBECONFIG2', secretName: 'chicken-crossed-the-road-kubeconfig', secretKey: 'chicken-crossed-the-road-kubeconfig')
-      ]
-    )
-  ]
+    containerTemplate(name: 'anthos', image: 'thilavanh/centos-kubectl', ttyEnabled: true,)]
 )
 {
   node(POD_LABEL) {
