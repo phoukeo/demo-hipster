@@ -14,7 +14,7 @@ podTemplate(
   node(POD_LABEL) {
       stage('Get an Anthos project') {
           container('anthos') {
-              stage('Install Hybrid Hipster Demo Application')
+              stage('Install Hybrid Hipster Demo Application') {
               git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
               withCredentials([
                 file(credentialsId: "${cluster1}", variable: 'KUBECONFIG1'),
@@ -25,6 +25,7 @@ podTemplate(
                 kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hybrid/cloud -n hipster
                 """
               }
+            }
           }
       }
   }
