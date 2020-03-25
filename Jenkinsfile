@@ -20,8 +20,9 @@ podTemplate(
 
       stage('Get an Anthos project') {
           container('anthos') {
-              stage('Install Hybrid Hipster Demo Application') {
-                git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
+              stage('Install Hybrid Hipster Demo Application')
+                steps {
+                  // To kubes or not to kubes.
                   {
                     sh """
                     echo "$cluster1"
