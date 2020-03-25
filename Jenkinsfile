@@ -1,6 +1,6 @@
 // properties([[$class: 'JiraProjectProperty'], gitLabConnection(''),
 //   parameters([
-//     choice(choices: ['apply'], description: '', name: 'mode'),
+//     choice(choices: ['apply', 'delete'], description: '', name: 'mode'),
 //     credentials(name: 'cluster1', credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: 'user1-anthos-ansiblized-kubeconfig', description: '', required: true),
 //     credentials(name: 'cluster2', credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: 'chicken-crossed-the-road-kubeconfig', description: '', required: true)
 //     ])])
@@ -20,10 +20,13 @@ podTemplate(
       stage('Get an Anthos project') {
           container('anthos') {
               stage('Install Hybrid Hipster Demo Application')
+              withCredentials([
+                file(credentialsId: '${cluster1}', variable: 'KUBECONFIG1'),
+                file(credentialsId: '${cluster2}', variable: 'KUBECONFIG2')])
               {
                 sh """
-                kubectl --kubeconfig ${params.cluster2} ${params.mode} -f ./hybrid/onprem -n hipster
-                kubectl --kubeconfig ${params.cluster1} ${params.mode} -f ./hybrid/cloud -n hipster
+                kubectl --kubeconfig $KUBECONFIG2 ${params.mode} -f ./hybrid/onprem -n hipster
+                kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hybrid/cloud -n hipster
                 """
               }
           }
