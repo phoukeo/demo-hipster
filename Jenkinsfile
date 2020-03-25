@@ -5,7 +5,7 @@ podTemplate(
       envVars: [
         secretEnvVar(key: 'KUBECONFIG1', secretName: 'user1-anthos-ansiblized-kubeconfig', secretKey: 'user1-anthos-ansiblized-kubeconfig'),
         secretEnvVar(key: 'KUBECONFIG2', secretName: 'chicken-crossed-the-road-kubeconfig', secretKey: 'chicken-crossed-the-road-kubeconfig')]
-      parameters [
+      parameters: [
         choice(name: 'mode', choices: ['apply', 'delete'], description: 'apply, delete' ),
         choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something'),
         credentials(name: 'cluster1', defaultValue: "user1-anthos-ansiblized-kubeconfig", description: 'Your User Cluster1', credentialType: "Secret file", required: true),
