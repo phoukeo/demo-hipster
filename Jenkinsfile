@@ -17,17 +17,13 @@ podTemplate(
       credentials credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: 'user1-anthos-ansiblized-kubeconfig', description: 'Kubeconfig file for Cluster1', name: 'cluster1', required: true
       credentials credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: 'chicken-crossed-the-road-kubeconfig', description: 'Kubeconfig file for Cluster2', name: 'cluster2', required: true
     }
-
       stage('Get an Anthos project') {
           container('anthos') {
               stage('Install Hybrid Hipster Demo Application')
               {
-              // To kubes or not to kubes.
                 sh """
-                echo "$cluster1"
-                echo "$cluster2"
-                echo "${params.cluster1}"
-                echo "${params.cluster2}"
+                kubectl --kubeconfig ${params.cluster2} ${params.mode} -f ./hybrid/onprem -n hipster
+                kubectl --kubeconfig ${params.cluster1} ${params.mode} -f ./hybrid/cloud -n hipster
                 """
               }
           }
