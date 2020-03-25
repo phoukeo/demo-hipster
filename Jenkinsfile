@@ -21,14 +21,14 @@ podTemplate(
       stage('Get an Anthos project') {
           container('anthos') {
               stage('Install Hybrid Hipster Demo Application')
-                steps {
-                  // To kubes or not to kubes.
-                    sh """
-                    echo "$cluster1"
-                    echo "$cluster2"
-                    echo "${params.cluster1}"
-                    echo "${params.cluster2}"
-                    """
+              {
+              // To kubes or not to kubes.
+                sh """
+                echo "$cluster1"
+                echo "$cluster2"
+                echo "${params.cluster1}"
+                echo "${params.cluster2}"
+                """
               }
           }
       }
