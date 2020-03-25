@@ -58,7 +58,10 @@ spec:
   gateways:
   - frontend-gateway
   http:
-  - route:
+  - match:
+    - uri:
+        exact: /hipster
+    route:
     - destination:
         host: frontend
         port:
