@@ -28,12 +28,10 @@ podTemplate(
                 //   {
 
                     sh """
-                    echo '$KUBECONFIG1'
-                    echo '$KUBECONFIG2'
-                    echo '"${params.mode}"'
-                    echo '${params.CHOICE}'
+                    echo "$cluster1"
+                    echo "$cluster2"
                     echo "${params.cluster1}"
-                    echo ${params.cluster2}
+                    echo "${params.cluster2}"
                     """
 
               }
