@@ -19,7 +19,7 @@ metadata:
   name: frontend-ingress
 spec:
   hosts:
-  - "*"
+  - "hipster.demo.local"
   gateways:
   - frontend-gateway
   http:
