@@ -14,7 +14,7 @@ podTemplate(
       stage('Get an Anthos project') {
           container('anthos') {
               stage('Install Multicluster Bookinfo Demo Application') {
-              git (url: 'https://github.com/phoukeo/anthos-ansible', credentialsId: 'phoukeo-github')
+              git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
               withCredentials([
                 file(credentialsId: "${cluster1}", variable: 'KUBECONFIG1')])
               {
