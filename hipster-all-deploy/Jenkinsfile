@@ -1,25 +1,29 @@
+properties([[$class: 'JiraProjectProperty'], gitLabConnection(''),
+  parameters([
+    choice(choices: ['apply', 'delete'], description: '', name: 'mode'),
+    credentials(name: 'cluster1', credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: '', description: '', required: true)
+    ])])
+
 podTemplate(
   cloud: 'kubernetes',
   containers: [
-      containerTemplate(name: 'anthos', image: 'thilavanh/centos-kubectl', ttyEnabled: true)
-    ]) {
-
-      node(POD_LABEL) {
-          stage('Get an Anthos project') {
-              container('anthos') {
-                  stage('Install Multi-Cluster Hipster Demo Application') {
-                    git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
-                    withCredentials([
-                      file(credentialsId: '${cluster1}', variable: 'KUBECONFIG1'),
-                      file(credentialsId: '${cluster2}', variable: 'KUBECONFIG2')])
-                     {
-                        sh """
-                        kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hipster-all-deploy -n hipster
-                        kubectl --kubeconfig $KUBECONFIG2 ${params.mode} -f ./hipster-all-deploy -n hipster
-                        """
-                      }
-                  }
+    containerTemplate(name: 'anthos', image: 'thilavanh/centos-kubectl', ttyEnabled: true,)]
+)
+{
+  node(POD_LABEL) {
+      stage('Get an Anthos project') {
+          container('anthos') {
+              stage('Install Multicluster Bookinfo Demo Application') {
+              git (url: 'https://github.com/phoukeo/anthos-ansible', credentialsId: 'phoukeo-github')
+              withCredentials([
+                file(credentialsId: "${cluster1}", variable: 'KUBECONFIG1')])
+              {
+                sh """
+                kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hipster-all-deploy -n hipster
+                """
               }
+            }
           }
       }
   }
+}
