@@ -21,7 +21,11 @@ podTemplate(
                 file(credentialsId: "${cluster2}", variable: 'KUBECONFIG2')])
               {
                 sh """
+                kubectl --kubeconfig $KUBECONFIG2 create namespace hipster
+                kubectl --kubeconfig $KUBECONFIG2 label ns hipster istio-injection=enabled --overwrite
                 kubectl --kubeconfig $KUBECONFIG2 ${params.mode} -f ./hybrid/onprem -n hipster
+                kubectl --kubeconfig $KUBECONFIG1 create namespace hipster
+                kubectl --kubeconfig $KUBECONFIG1 label ns hipster istio-injection=enabled --overwrite
                 kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hybrid/cloud -n hipster
                 """
               }
