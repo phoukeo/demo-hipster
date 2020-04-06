@@ -1,4 +1,4 @@
-properties([[$class: 'JiraProjectProperty'], gitLabConnection(''),
+properties([
   parameters([
     choice(choices: ['apply', 'delete'], description: '', name: 'mode'),
     credentials(name: 'cluster1', credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: 'user1-anthos-ansiblized-kubeconfig', description: '', required: true),
