@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    environment {
+        PROJECT_ID = 'ignw-anthos-lab-pod1a'
+        CLUSTER_NAME = 'megatron'
+        LOCATION = 'us-west1-b'
+        CREDENTIALS_ID = 'svc_acc_key'
+    }
+    stages {
+        stage('Deploy to GKE') {
+            steps{
+                step([
+                $class: 'KubernetesEngineBuilder',
+                projectId: env.PROJECT_ID,
+                clusterName: env.CLUSTER_NAME,
+                location: env.LOCATION,
+                manifestPattern: 'hipster-all-deploy/deployments.yaml',
+                credentialsId: env.CREDENTIALS_ID,
+                verifyDeployments: false])
+            }
+        }
+    }
+}

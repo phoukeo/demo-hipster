@@ -1,0 +1,47 @@
+pipeline {
+
+  environment {
+      PROJECT_ID = 'ignw-anthos-lab-pod1a'
+      CLUSTER_NAME = 'megatron'
+      NAMESPACE = 'hipster'
+      LOCATION = 'us-west1-b'
+      SVC_ACC_KEY = 'svc_acc_key'
+  }
+
+  agent {
+    kubernetes {
+      label 'sample-app'
+      defaultContainer 'jnlp'
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+labels:
+  component: ci
+spec:
+  containers:
+  - name: kubectl
+    image: thilavanh/centos-kubectl
+    command:
+    - cat
+    tty: true
+"""
+}
+  }
+    stage('Deploy Production') {
+      // Production branch
+      when { branch 'master' }
+      steps{
+        container('kubectl') {
+        step([$class: 'KubernetesEngineBuilder',
+          projectId: env.PROJECT_ID,
+          namespace: env.NAMESPACE,
+          clusterName: env.CLUSTER_NAME,
+          location: env.LOCATION,
+          manifestPattern: 'hipster-all-deploy/deployments.yaml',
+          credentialsId: env.SVC_ACC_KEY,
+          verifyDeployments: false])
+        }
+      }
+    }
+  }
