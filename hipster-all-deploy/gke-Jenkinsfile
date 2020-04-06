@@ -1,5 +1,5 @@
 pipeline {
-  agent { label: "default" }
+  agent { any }
   stages {
       stage('Deploy Staging') {
           steps{
@@ -10,25 +10,6 @@ pipeline {
                       zone: "us-west1-b",
                       manifestPattern: 'hipster-all-deploy/',
                       credentialsId: "service-account-creds",
-                      verifyDeployments: true])
-          }
-      }
-      stage('Wait for SRE Approval') {
-       steps{
-         timeout(time:12, unit:'HOURS') {
-            input message:'Approve deployment?', submitter: 'sre-approvers'
-         }
-       }
-      }
-      stage('Deploy Production') {
-          steps{
-              git url: 'https://github.com/phoukeo/demo-hipster'
-              step([$class: 'KubernetesEngineBuilder',
-                      projectId: "my-project-id",
-                      clusterName: "production",
-                      zone: "us-central1-f",
-                      manifestPattern: 'k8s/production/',
-                      credentialsId: "gke-service-account",
                       verifyDeployments: true])
           }
       }
