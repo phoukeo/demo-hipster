@@ -1,22 +1,5 @@
 pipeline {
-agent {
-  kubernetes {
-    yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    anthos: anthos
-spec:
-  containers:
-    - name: anthos
-      image: thilavanh/centos-kubectl
-      command:
-      - cat
-      tty: true
-"""
-  }
-}
+agent { label: "master" }
 
   stages {
       stage('Deploy Staging') {
