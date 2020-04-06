@@ -1,8 +1,27 @@
 pipeline {
-agent { label 'master' }
+agent {
+  kubernetes {
+    yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    anthos: anthos
+spec:
+  containers:
+    - name: anthos
+      image: thilavanh/centos-kubectl
+      command:
+      - cat
+      tty: true
+"""
+  }
+}
+
   stages {
       stage('Deploy Staging') {
           steps{
+          container('anthos')
             git url: 'https://github.com/phoukeo/demo-hipster'
             step([$class: 'KubernetesEngineBuilder',
                     projectId: "ignw-anthos-lab-pod1a",
