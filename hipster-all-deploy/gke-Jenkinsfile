@@ -6,7 +6,7 @@ agent { label 'master' }
             git url: 'https://github.com/phoukeo/demo-hipster'
             step([$class: 'KubernetesEngineBuilder',
                     projectId: "ignw-anthos-lab-pod1a",
-                    clusterName: "magatron",
+                    clusterName: "megatron",
                     location: "us-west1-b",
                     manifestPattern: 'hipster-all-deploy/',
                     credentialsId: "svc_acc_key",
