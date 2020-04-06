@@ -7,9 +7,9 @@ podTemplate(
 {
   node(POD_LABEL) {
   stage('Deploy Staging') {
-          container('anthos')
+          container('anthos'){
             git url: 'https://github.com/phoukeo/demo-hipster'
-            step([$class: 'KubernetesEngineBuilder',
+            stage([$class: 'KubernetesEngineBuilder',
                     projectId: "ignw-anthos-lab-pod1a",
                     clusterName: "megatron",
                     location: "us-west1-b",
@@ -17,5 +17,6 @@ podTemplate(
                     credentialsId: "svc_acc_key",
                     verifyDeployments: true])
           }
+        }
       }
   }
