@@ -7,7 +7,7 @@ agent { label 'master' }
             step([$class: 'KubernetesEngineBuilder',
                     projectId: "ignw-anthos-lab-pod1a",
                     clusterName: "magatron",
-                    zone: "us-west1-b",
+                    location: "us-west1-b",
                     manifestPattern: 'hipster-all-deploy/',
                     credentialsId: "svc_acc_key",
                     verifyDeployments: true])
