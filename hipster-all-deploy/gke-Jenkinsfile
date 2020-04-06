@@ -1,26 +1,8 @@
 pipeline {
-agent {
-  kubernetes {
-    yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-labels:
-  some-label: some-label-value
-spec:
-containers:
-- name: busybox
-  image: busybox
-  command:
-  - cat
-  tty: true
-"""
-  }
-}
+agent { master }
   stages {
       stage('Deploy Staging') {
           steps{
-            container('busybox')
             git url: 'https://github.com/phoukeo/demo-hipster'
             step([$class: 'KubernetesEngineBuilder',
                     projectId: "ignw-anthos-lab-pod1a",
