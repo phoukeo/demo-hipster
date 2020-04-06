@@ -29,8 +29,6 @@ spec:
 }
   }
     stage('Deploy Production') {
-      // Production branch
-      when { branch 'master' }
       steps{
         container('kubectl') {
         step([$class: 'KubernetesEngineBuilder',
