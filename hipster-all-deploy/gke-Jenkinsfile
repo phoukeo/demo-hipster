@@ -1,3 +1,5 @@
+properties([$class: 'KubernetesEngineBuilder'])
+
 podTemplate(
   cloud: 'kubernetes',
   containers: [
@@ -9,13 +11,12 @@ podTemplate(
   stage('Deploy Staging') {
           container('anthos'){
             git url: 'https://github.com/phoukeo/demo-hipster'
-            stage([$class: 'KubernetesEngineBuilder',
-                    projectId: "ignw-anthos-lab-pod1a",
+            stage(projectId: "ignw-anthos-lab-pod1a",
                     clusterName: "megatron",
                     location: "us-west1-b",
                     manifestPattern: 'hipster-all-deploy/',
                     credentialsId: "svc_acc_key",
-                    verifyDeployments: true])
+                    verifyDeployments: true)
           }
         }
       }
