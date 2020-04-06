@@ -28,6 +28,7 @@ spec:
 """
 }
   }
+  stages{
     stage('Deploy Production') {
       steps{
         container('kubectl') {
@@ -41,5 +42,5 @@ spec:
           verifyDeployments: false])
         }
       }
-    }
+    }}
   }
