@@ -10,23 +10,23 @@ podTemplate(
         envVar(key: "PROJECT_ID", value: "ignw-anthos-lab-pod1a"),
         envVar(key: "CLUSTER_NAME", value: "megatron"),
         envVar(key: "LOCATION", value: "us-west1-b"),
-        secretEnvVar(key: "svc_acc_key", secretName: "svc_acc_key", secretKey: "svc_acc_key")
+        secretEnvVar(key: "SVC_ACC_KEY", secretName: "svc_acc_key", secretKey: "svc_acc_key")
       ])]
 )
 
 {
   node(POD_LABEL) {
-        stage('Deploy to GKE') {
-        container('anthos') {
-                stage([
-                $class: 'KubernetesEngineBuilder',
-                projectId: ${env.PROJECT_ID},
-                clusterName: ${env.CLUSTER_NAME},
-                location: ${env.LOCATION},
-                manifestPattern: 'hipster-all-deploy/deployments.yaml',
-                credentialsId: ${env.CREDENTIALS_ID},
-                verifyDeployments: false])
-            }
-        }
+    stage('Deploy to GKE') {
+      container('anthos') {
+              step([
+              $class: 'KubernetesEngineBuilder',
+              projectId: ${env.PROJECT_ID},
+              clusterName: ${env.CLUSTER_NAME},
+              location: ${env.LOCATION},
+              manifestPattern: 'hipster-all-deploy/deployments.yaml',
+              credentialsId: ${env.SVC_ACC_KEY},
+              verifyDeployments: false])
+          }
+    }
   }
 }
