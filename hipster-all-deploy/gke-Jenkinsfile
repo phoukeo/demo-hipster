@@ -1,5 +1,5 @@
 pipeline {
-    agent k8s
+    agent any
     environment {
         PROJECT_ID = 'ignw-anthos-lab-pod1a'
         CLUSTER_NAME = 'megatron'
