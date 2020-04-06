@@ -1,40 +1,23 @@
-properties([[$class: 'JiraProjectProperty'], gitLabConnection(''),
-  parameters([
-    choice(choices: ['apply', 'delete'], description: '', name: 'mode'),
-    credentials(name: 'cluster1', credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: '', description: '', required: true)
-    ])])
-
 podTemplate(
   cloud: 'kubernetes',
   containers: [
-    containerTemplate(name: 'anthos', image: 'thilavanh/centos-kubectl', ttyEnabled: true,)]
-)
-{
-  node(POD_LABEL) {
-      stage('Prep Hipster Deploy') {
-          container('anthos') {
-              stage('Install Multicluster Hipster Demo Application') {
-              git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
-              withCredentials([
-                file(credentialsId: "${cluster1}", variable: 'KUBECONFIG1')])
-              {
-                sh """
-                kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hipster-all-deploy -n hipster
-                """
-              }
-            }
-            stage('Install Hip on GKE'){
-                git url: 'https://github.com/phoukeo/demo-hipster'
-                stage([$class: 'KubernetesEngineBuilder',
-                        projectId: "ignw-anthos-lab-pod1a",
-                        clusterName: "magatron",
-                        zone: "us-west1-b",
-                        manifestPattern: 'hipster-all-deploy/',
-                        credentialsId: "service-account-creds",
-                        verifyDeployments: true])
-            }
+      containerTemplate(name: 'anthos', image: 'thilavanh/centos-kubectl', ttyEnabled: true)
+    ]) {
 
+      node(POD_LABEL) {
+          stage('Get an Anthos project') {
+              container('anthos') {
+                  stage('Install Multi-Cluster Hipster Demo Application') {
+                    git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
+                    withCredentials([
+                      file(credentialsId: '${cluster1}', variable: 'KUBECONFIG1')])
+                     {
+                        sh """
+                        kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hipster-all-deploy -n hipster
+                        """
+                      }
+                  }
+              }
           }
       }
   }
-}
