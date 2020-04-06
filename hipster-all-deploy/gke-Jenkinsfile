@@ -9,7 +9,7 @@ pipeline {
                       clusterName: "magatron",
                       zone: "us-west1-b",
                       manifestPattern: 'hipster-all-deploy/',
-                      credentialsId: "service-account-creds",
+                      credentialsId: "svc_acc_key",
                       verifyDeployments: true])
           }
       }
