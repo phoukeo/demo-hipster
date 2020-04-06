@@ -11,9 +11,9 @@ podTemplate(
 )
 {
   node(POD_LABEL) {
-      stage('Get an Anthos project') {
+      stage('Prep Hipster Deploy') {
           container('anthos') {
-              stage('Install Multicluster Bookinfo Demo Application') {
+              stage('Install Multicluster Hipster Demo Application') {
               git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
               withCredentials([
                 file(credentialsId: "${cluster1}", variable: 'KUBECONFIG1')])
@@ -23,7 +23,7 @@ podTemplate(
                 """
               }
             }
-            stage{
+            stage('Install Hip on GKE'){
                 git url: 'https://github.com/phoukeo/demo-hipster'
                 stage([$class: 'KubernetesEngineBuilder',
                         projectId: "ignw-anthos-lab-pod1a",
