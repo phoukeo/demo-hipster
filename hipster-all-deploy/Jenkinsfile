@@ -23,6 +23,17 @@ podTemplate(
                 """
               }
             }
+            stage{
+                git url: 'https://github.com/phoukeo/demo-hipster'
+                stage([$class: 'KubernetesEngineBuilder',
+                        projectId: "ignw-anthos-lab-pod1a",
+                        clusterName: "magatron",
+                        zone: "us-west1-b",
+                        manifestPattern: 'hipster-all-deploy/',
+                        credentialsId: "service-account-creds",
+                        verifyDeployments: true])
+            }
+
           }
       }
   }
