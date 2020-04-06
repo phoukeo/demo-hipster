@@ -3,7 +3,7 @@ podTemplate(
   cloud: 'kubernetes',
   containers: [
     containerTemplate(
-      name: 'anthos',
+      name: 'kubectl',
       image: 'thilavanh/centos-kubectl',
       ttyEnabled: true,
       envVars: [
@@ -18,16 +18,16 @@ podTemplate(
 {
   node(POD_LABEL) {
     stage('Deploy to GKE') {
-      container('anthos') {
+      container('kubectl') {
         stage('Installing Hybrid Hipster Demo App') {
           git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
-            {  step([$class: 'KubernetesEngineBuilder',
-              projectId: ${env.PROJECT_ID},
-              namespace: ${env.NAMESPACE},
-              clusterName: ${env.CLUSTER_NAME},
-              location: ${env.LOCATION},
+            { step([$class: 'KubernetesEngineBuilder',
+              projectId: env.PROJECT_ID,
+              namespace: env.NAMESPACE,
+              clusterName: env.CLUSTER_NAME,
+              location: env.LOCATION,
               manifestPattern: 'hipster-all-deploy/deployments.yaml',
-              credentialsId: ${env.SVC_ACC_KEY},
+              credentialsId: env.SVC_ACC_KEY,
               verifyDeployments: false])
             }
           }
