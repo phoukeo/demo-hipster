@@ -1,16 +1,34 @@
 pipeline {
-  agent any
+agent {
+  kubernetes {
+    yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+labels:
+  some-label: some-label-value
+spec:
+containers:
+- name: busybox
+  image: busybox
+  command:
+  - cat
+  tty: true
+"""
+  }
+}
   stages {
       stage('Deploy Staging') {
           steps{
-              git url: 'https://github.com/phoukeo/demo-hipster'
-              step([$class: 'KubernetesEngineBuilder',
-                      projectId: "ignw-anthos-lab-pod1a",
-                      clusterName: "magatron",
-                      zone: "us-west1-b",
-                      manifestPattern: 'hipster-all-deploy/',
-                      credentialsId: "svc_acc_key",
-                      verifyDeployments: true])
+            container('busybox')
+            git url: 'https://github.com/phoukeo/demo-hipster'
+            step([$class: 'KubernetesEngineBuilder',
+                    projectId: "ignw-anthos-lab-pod1a",
+                    clusterName: "magatron",
+                    zone: "us-west1-b",
+                    manifestPattern: 'hipster-all-deploy/',
+                    credentialsId: "svc_acc_key",
+                    verifyDeployments: true])
           }
       }
   }
