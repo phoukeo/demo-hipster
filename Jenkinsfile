@@ -8,12 +8,12 @@ properties([
 podTemplate(
   cloud: 'kubernetes',
   containers: [
-    containerTemplate(name: 'anthos', image: 'thilavanh/centos-kubectl', ttyEnabled: true,)]
+    containerTemplate(name: 'kubectl', image: 'thilavanh/centos-kubectl', ttyEnabled: true,)]
 )
 {
   node(POD_LABEL) {
       stage('Prep for Hybrid Hipster Deployment') {
-          container('anthos') {
+          container('kubectl') {
               stage('Installing Hybrid Hipster Demo App') {
               git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
               withCredentials([

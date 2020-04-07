@@ -1,23 +1,29 @@
+properties([
+  parameters([
+    choice(choices: ['apply', 'delete'], description: '', name: 'mode'),
+    credentials(name: 'cluster1', credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: 'user1-anthos-ansiblized-kubeconfig', description: '', required: true)
+    ])])
+
 podTemplate(
   cloud: 'kubernetes',
   containers: [
-      containerTemplate(name: 'kubectl', image: 'thilavanh/centos-kubectl', ttyEnabled: true)
-    ]) {
-
-      node(POD_LABEL) {
-          stage('Get an Anthos project') {
-              container('kubectl') {
-                  stage('Install Multi-Cluster Hipster Demo Application') {
-                    git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
-                    withCredentials([
-                      file(credentialsId: '${cluster1}', variable: 'KUBECONFIG1')])
-                     {
-                        sh """
-                        kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hipster-all-deploy -n hipster
-                        """
-                      }
-                  }
+    containerTemplate(name: 'kubectl', image: 'thilavanh/centos-kubectl', ttyEnabled: true,)]
+)
+{
+  node(POD_LABEL) {
+      stage('Prep for Hybrid Hipster Deployment') {
+          container('kubectl') {
+              stage('Installing Hybrid Hipster Demo App') {
+              git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
+              withCredentials([
+                file(credentialsId: "${cluster1}", variable: 'KUBECONFIG1')])
+              {
+                sh """
+                kubectl --kubeconfig $KUBECONFIG1 ${params.mode} -f ./hipster-all-deploy -n hipster
+                """
               }
+            }
           }
       }
   }
+}
