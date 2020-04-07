@@ -2,9 +2,9 @@ pipeline {
 
   environment {
       PROJECT_ID = 'ignw-anthos-lab-pod1a'
-      CLUSTER_NAME = '${params.gke_cluster_name}'
-      NAMESPACE = '${params.gke_namespace}'
-      LOCATION = '${params.gke_location}'
+      CLUSTER_NAME = "${params.gke_cluster_name}"
+      NAMESPACE = "${params.gke_namespace}"
+      LOCATION = "${params.gke_location}"
       SVC_ACC_KEY = 'svc_acc_key'
   }
 
