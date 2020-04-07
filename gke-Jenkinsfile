@@ -1,10 +1,18 @@
 pipeline {
 
+properties([
+  parameters([
+// Deploy New User Cluster and ACM
+    string(name: 'gke_cluster_name', defaultValue: "megatron", description: 'Your GKE Cluster Name', trim: true),
+    string(name: 'gke_namespace', defaultValue: "hipster", description: 'The namespace you want to install in', trim: true),
+    string(name: 'gke_location', defaultValue: "us-west1-b", description: 'Your GKE Cluster Location', trim: true)
+    ])])
+
   environment {
       PROJECT_ID = 'ignw-anthos-lab-pod1a'
-      CLUSTER_NAME = 'megatron'
-      NAMESPACE = 'hipster'
-      LOCATION = 'us-west1-b'
+      CLUSTER_NAME = '${params.gke_cluster_name}'
+      NAMESPACE = '${params.gke_namespace}'
+      LOCATION = '${params.gke_location}'
       SVC_ACC_KEY = 'svc_acc_key'
   }
 
