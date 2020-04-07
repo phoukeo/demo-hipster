@@ -37,7 +37,7 @@ spec:
           namespace: env.NAMESPACE,
           clusterName: env.CLUSTER_NAME,
           location: env.LOCATION,
-          manifestPattern: './',
+          manifestPattern: 'hipster-all-deploy',
           credentialsId: env.SVC_ACC_KEY,
           verifyDeployments: false])
         }
