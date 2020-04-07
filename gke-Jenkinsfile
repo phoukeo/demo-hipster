@@ -38,9 +38,10 @@ spec:
     stage('Deploy Hipster') {
       steps{
         container('kubectl') {
-        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, namespace: env.NAMESPACE, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'hipster-all-deploy/deployments.yaml', credentialsId: env.SVC_ACC_KEY, verifyDeployments: false])
-        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, namespace: env.NAMESPACE, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'hipster-all-deploy/services.yaml', credentialsId: env.SVC_ACC_KEY, verifyDeployments: false])
-        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, namespace: env.NAMESPACE, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'hipster-all-deploy/gateway.yaml', credentialsId: env.SVC_ACC_KEY, verifyDeployments: false])
+        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, namespace: env.NAMESPACE, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'hipster-all-deploy/', credentialsId: env.SVC_ACC_KEY, verifyDeployments: false])
+//        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, namespace: env.NAMESPACE, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'hipster-all-deploy/deployments.yaml', credentialsId: env.SVC_ACC_KEY, verifyDeployments: false])
+//        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, namespace: env.NAMESPACE, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'hipster-all-deploy/services.yaml', credentialsId: env.SVC_ACC_KEY, verifyDeployments: false])
+//        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, namespace: env.NAMESPACE, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'hipster-all-deploy/gateway.yaml', credentialsId: env.SVC_ACC_KEY, verifyDeployments: false])
         }
       }
     }}
