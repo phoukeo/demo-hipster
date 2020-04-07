@@ -1,6 +1,6 @@
 pipeline {
 
-properties([
+options([
   parameters([
 // Deploy New User Cluster and ACM
     string(name: 'gke_cluster_name', defaultValue: "megatron", description: 'Your GKE Cluster Name', trim: true),
