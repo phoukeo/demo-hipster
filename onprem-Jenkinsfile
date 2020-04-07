@@ -1,12 +1,12 @@
 podTemplate(
   cloud: 'kubernetes',
   containers: [
-      containerTemplate(name: 'anthos', image: 'thilavanh/centos-kubectl', ttyEnabled: true)
+      containerTemplate(name: 'kubectl', image: 'thilavanh/centos-kubectl', ttyEnabled: true)
     ]) {
 
       node(POD_LABEL) {
           stage('Get an Anthos project') {
-              container('anthos') {
+              container('kubectl') {
                   stage('Install Multi-Cluster Hipster Demo Application') {
                     git (url: 'https://github.com/phoukeo/demo-hipster.git', credentialsId: 'phoukeo-github')
                     withCredentials([

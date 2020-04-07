@@ -11,7 +11,7 @@ pipeline {
   parameters {
     string(name: 'gke_cluster_name', defaultValue: "megatron", description: 'Your GKE Cluster Name', trim: true)
     string(name: 'gke_namespace', defaultValue: "hipster", description: 'The namespace you want to install in', trim: true)
-    string(name: 'gke_location', defaultValue: "us-west1-b", description: 'Your GKE Cluster Location', trim: true)
+    string(name: 'gke_location', defaultValue: "us-west1-c", description: 'Your GKE Cluster Location', trim: true)
   }
 
   agent {
